@@ -31,3 +31,4 @@
 *.out
 *.app
 *secrets.h
+*.pio/*
