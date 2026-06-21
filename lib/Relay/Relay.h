@@ -11,7 +11,7 @@ class RelayMotore{
     bool is_open;
     int id;
 
-    RelayMotore(int open_pin, int close_pin, int motion_duration, bool initially_open = false);
+    RelayMotore(int open_pin, int close_pin, int motion_duration, bool initially_open = false, bool skip_init = false);
     void openValve();
     void closeValve();
     void invertValve();
@@ -25,7 +25,7 @@ class SingleRelay{
     int delay_ms;
     int id;
 
-    SingleRelay(int pin, int delay_ms);
+    SingleRelay(int pin, int delay_ms, bool skip_init = false);
     void turnOn();
     void turnOff();
     void invertOnOff();
