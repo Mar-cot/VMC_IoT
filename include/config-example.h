@@ -23,6 +23,8 @@
 
 // --- Deep Sleep ---
 #define DEEP_SLEEP_TIME_S  210               // Seconds between wake cycles
+#define COMMAND_LISTEN_S   10                // Seconds to listen for MQTT commands after publish
+#define ACTUATOR_LOCK_S    1800              // Default lock duration for manual actuator override (30 min)
 
 // --- Pin Assignments ---
 #define DEUM_VALVE_OPEN_PIN    19

@@ -8,6 +8,7 @@ RelayMotore::RelayMotore(int open_pin, int close_pin, int motion_duration_ms, bo
     this->close_pin = close_pin;
     this->motion_duration = motion_duration_ms;
     this->id = ++relay_number;
+    this->locked = false;
     pinMode(open_pin, OUTPUT);
     pinMode(close_pin, OUTPUT);
     digitalWrite(open_pin, HIGH);
@@ -47,16 +48,24 @@ void RelayMotore::invertValve(){
     else openValve();
 }
 
+bool RelayMotore::tryOpenValve(){
+    if(locked) return false;
+    openValve();
+    return true;
+}
 
-
-
-
+bool RelayMotore::tryCloseValve(){
+    if(locked) return false;
+    closeValve();
+    return true;
+}
 
 
 SingleRelay::SingleRelay(int pin, int delay_ms, bool skip_init){
     this->pin = pin;
     this->delay_ms = delay_ms;
     this->id = ++relay_number;
+    this->locked = false;
     pinMode(pin, OUTPUT);
     if(skip_init){
         this->is_on = false; // Caller must set the real state
@@ -91,5 +100,14 @@ void SingleRelay::invertOnOff(){
     else turnOn();
 }
 
+bool SingleRelay::tryTurnOn(){
+    if(locked) return false;
+    turnOn();
+    return true;
+}
 
-
+bool SingleRelay::tryTurnOff(){
+    if(locked) return false;
+    turnOff();
+    return true;
+}
